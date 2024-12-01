@@ -16,6 +16,12 @@ func NewFlagSet(name string) *FlagSet {
 	}
 	return &FlagSet{name: name, flags: map[string]*flag.Flag{}, Usage: func() {}}
 }
+func (f *FlagSet) Name() string {
+	if Reference {
+		return f.f.Name()
+	}
+	return f.name
+}
 func (f *FlagSet) Var(value flag.Value, name string, usage string) {
 	if Reference {
 		f.f.Var(value, name, usage)
